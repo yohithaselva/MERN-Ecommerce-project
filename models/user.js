@@ -31,7 +31,7 @@ const UserSchema = new Schema(
     // To ensure admin or not user
     isAdmin: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     hasShippingAddress: {
       type: Boolean,
