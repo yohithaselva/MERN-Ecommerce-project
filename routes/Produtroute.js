@@ -19,7 +19,7 @@ ProductRouter.post(
   isAdmin,
   createProductCtrl
 ); // for upload single file incase multiple file use array
-ProductRouter.get("/viewproduct", isLoggedIn, getProductCtrl);
+ProductRouter.get("/viewproduct", getProductCtrl);
 ProductRouter.get("/viewproduct/:id", getProductsCtrl);
 ProductRouter.put("/update/:id", isLoggedIn, isAdmin, updateProductsCtrl);
 ProductRouter.delete("/delete/:id", isLoggedIn, isAdmin, deleteProductsCtrl);
