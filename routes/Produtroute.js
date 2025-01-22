@@ -19,9 +19,9 @@ ProductRouter.post(
   isAdmin,
   createProductCtrl
 ); // for upload single file incase multiple file use array
-ProductRouter.get("/viewproduct", getProductCtrl);
-ProductRouter.get("/viewproduct/:id", getProductsCtrl);
-ProductRouter.put("/update/:id", isLoggedIn, isAdmin, updateProductsCtrl);
-ProductRouter.delete("/delete/:id", isLoggedIn, isAdmin, deleteProductsCtrl);
+ProductRouter.get("/", getProductCtrl);
+ProductRouter.get("/:id", getProductsCtrl);
+ProductRouter.put("/:id", isLoggedIn, isAdmin, updateProductsCtrl);
+ProductRouter.delete("/:id/delete", isLoggedIn, isAdmin, deleteProductsCtrl);
 
 export default ProductRouter;

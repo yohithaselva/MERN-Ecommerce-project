@@ -9,12 +9,12 @@ import {
 } from "../controllers/colorCtrl.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 
-const colorRoute = express.Router();
+const colorRouter = express.Router();
 
-colorRoute.post("/color", isLoggedIn, isAdmin, createcolorCtrl);
-colorRoute.get("/getcolors", getcolorsCtrl);
-colorRoute.get("/getcolor/:id", getcolorCtrl);
-colorRoute.put("/updatecolor/:id", isLoggedIn, isAdmin, updatecolorCtrl);
-colorRoute.delete("/deletecolor/:id", isLoggedIn, isAdmin, deletecolorCtrl);
+colorRouter.post("/", isLoggedIn, isAdmin, createcolorCtrl);
+colorRouter.get("/", getcolorsCtrl);
+colorRouter.get("/:id", getcolorCtrl);
+colorRouter.put("/:id", isLoggedIn, isAdmin, updatecolorCtrl);
+colorRouter.delete("/:id", isLoggedIn, isAdmin, deletecolorCtrl);
 
-export default colorRoute;
+export default colorRouter;

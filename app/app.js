@@ -1,19 +1,29 @@
+import dotenv from "dotenv";
+dotenv.config();
+import cors from "cors";
 import express from "express";
 import Stripe from "stripe";
 import dbconnect from "../config/dbconnect.js";
 import userRoute from "../routes/Userroute.js";
 import { globalErrHandler, notFound } from "../middlewares/globalErrHandler.js";
 import ProductRouter from "../routes/Produtroute.js";
-import categoriesRoute from "../routes/categoriesroute.js";
-import brandRoute from "../routes/brandroute.js";
-import colorRoute from "../routes/Colorroute.js";
-import reviewRoute from "../routes/reviewroute.js";
-import OrderRoute from "../routes/Orderroutes.js";
+import categoriesRouter from "../routes/categoriesroute.js";
+import brandRouter from "../routes/brandroute.js";
+import colorRouter from "../routes/Colorroute.js";
+import reviewRouter from "../routes/reviewroute.js";
+import OrderRouter from "../routes/Orderroutes.js";
 import Order from "../models/Order.js";
-import CouponRoute from "../routes/Couponroute.js";
+import CouponRouter from "../routes/Couponroute.js";
 // to connect db
 dbconnect();
 const app = express();
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with your frontend URL
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    credentials: true,
+  })
+);
 
 //Stripe webhooke API it should be always above all the route app including express.json()
 // This is your test secret API key.
@@ -24,7 +34,6 @@ const stripe = new Stripe(process.env.STRIPE_KEY);
 // at https://dashboard.stripe.com/webhooks
 const endpointSecret =
   "whsec_2ea1c5a17724292d98827b8699ff85bce38bc8db41bbc176113a65aea57de0ac"; // should not have any whitespace
-
 app.post(
   "/webhook",
   express.raw({ type: "application/json" }),
@@ -90,15 +99,17 @@ app.post(
 );
 // Inorder to avoid payload
 app.use(express.json());
+
 //routes
-app.use("/admin/", userRoute);
-app.use("/products/", ProductRouter);
-app.use("/", categoriesRoute);
-app.use("/", brandRoute);
-app.use("/", colorRoute);
-app.use("/", reviewRoute);
-app.use("/", OrderRoute);
-app.use("/", CouponRoute);
+//Home route
+app.use("/user", userRoute);
+app.use("/product", ProductRouter);
+app.use("/category", categoriesRouter);
+app.use("/brands", brandRouter);
+app.use("/color", colorRouter);
+app.use("/review", reviewRouter);
+app.use("/order", OrderRouter);
+app.use("/coupon", CouponRouter);
 
 //err middleware
 app.use(notFound);

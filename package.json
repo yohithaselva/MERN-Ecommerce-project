@@ -17,7 +17,9 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cloudinary": "^1.41.3",
-    "dotenv": "^16.4.5",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.4.7",
     "express": "^4.21.1",
     "express-async-handler": "^1.2.0",
     "git": "^0.1.5",
@@ -31,6 +33,7 @@
     "node": "^20.18.1",
     "stripe": "^17.5.0",
     "v1": "^1.0.0",
+    "webhook": "^0.0.2",
     "yarn": "^1.22.22"
   },
   "devDependencies": {

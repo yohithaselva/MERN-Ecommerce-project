@@ -9,12 +9,12 @@ import {
 } from "../controllers/CouponCtrl.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 
-const CouponRoute = express.Router();
+const CouponRouter = express.Router();
 
-CouponRoute.post("/coupon", isLoggedIn, isAdmin, createCouponCtrl);
-CouponRoute.get("/coupon", isLoggedIn, getCouponsCtrl);
-CouponRoute.get("/coupon/:id", isLoggedIn, getCouponCtrl);
-CouponRoute.put("/updatecoupon/:id", isLoggedIn, isAdmin, updateCouponCtrl);
-CouponRoute.delete("/deletecoupon/:id", isLoggedIn, isAdmin, deleteCouponCtrl);
+CouponRouter.post("/", isLoggedIn, isAdmin, createCouponCtrl);
+CouponRouter.get("/single", isLoggedIn, getCouponsCtrl);
+CouponRouter.get("/:id", isLoggedIn, getCouponCtrl);
+CouponRouter.put("/update/:id", isLoggedIn, isAdmin, updateCouponCtrl);
+CouponRouter.delete("/delete/:id", isLoggedIn, isAdmin, deleteCouponCtrl);
 
-export default CouponRoute;
+export default CouponRouter;
