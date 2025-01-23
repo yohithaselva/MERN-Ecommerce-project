@@ -103,7 +103,7 @@ app.use(express.json());
 //routes
 //Home route
 app.use("/user", userRoute);
-app.use("/product", ProductRouter);
+app.use("/products", ProductRouter);
 app.use("/category", categoriesRouter);
 app.use("/brands", brandRouter);
 app.use("/color", colorRouter);

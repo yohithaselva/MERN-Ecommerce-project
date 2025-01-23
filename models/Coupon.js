@@ -36,9 +36,9 @@ const CouponSchema = new Schema(
 // virtual property refers to that it exist logically but it will not be persisted in mongodb similar to data abstraction
 //coupon is expired
 CouponSchema.virtual("isExpired").get(function () {
-  return Date.now() > this.endDate;
+  return this.endDate < Date.now();
 });
-//days left for coupon to expire
+
 CouponSchema.virtual("daysLeft").get(function () {
   const daysLeft =
     Math.ceil((this.endDate - Date.now()) / (1000 * 60 * 60 * 24)) +
@@ -49,14 +49,14 @@ CouponSchema.virtual("daysLeft").get(function () {
 // mongoose supports certain middlewares known as pre function which can perform some operation even after saving it in db
 //validation
 CouponSchema.pre("validate", function (next) {
-  if (this.startDate > this.endDate) {
+  if (this.endDate < this.startDate) {
     throw new Error("End date must be greater than start date");
   }
   next();
 });
 CouponSchema.pre("validate", function (next) {
   if (this.startDate < Date.now()) {
-    throw new Error("End date must be less than today's date");
+    throw new Error("start date cannot be less than today");
   }
   next();
 });

@@ -39,7 +39,7 @@ export const createCouponCtrl = expressAsyncHandler(async (req, res) => {
 //@access private
 
 export const getCouponsCtrl = expressAsyncHandler(async (req, res) => {
-  const coupons = await Coupon.find({ user: req.userAuthId });
+  const coupons = await Coupon.find();
   res.status(200).json({
     status: "Success",
     message: "All coupons fetched successfully",
